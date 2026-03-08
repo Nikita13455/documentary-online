@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор бланков</title>
+    
+    <style>
+        /* Подключаем красивый шрифт */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Основной блок приложения (БЭМ) */
+        .app {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        /* Карточка с формой */
+        .app__card {
+            background: white;
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        /* Заголовок */
+        .app__title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1e1e2f;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Переключатели (табы) */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            background: #f0f2f5;
+            padding: 6px;
+            border-radius: 50px;
+            margin-bottom: 40px;
+        }
+
+        .tabs__btn {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+            color: #666;
+        }
+
+        .tabs__btn--active {
+            background: white;
+            color: #4361ee;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
+        }
+
+        /* Блоки форм */
+        .form {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .form--active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Группа полей */
+        .form__group {
+            margin-bottom: 24px;
+        }
+
+        .form__label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form__input {
+            width: 100%;
+            padding: 16px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .form__input:focus {
+            border-color: #4361ee;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
+        }
+
+        /* Сетка для двух колонок */
+        .form__row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* Кнопка отправки */
+        .form__submit {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #4361ee 0%, #764ba2 100%);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .form__submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="app__card">
+            <h1 class="app__title">📄 Генератор бланков</h1>
+            
+            <!-- Переключатели (БЭМ) -->
+            <div class="tabs">
+                <button class="tabs__btn tabs__btn--active" data-type="organization">🏢 Бланк организации</button>
+                <button class="tabs__btn" data-type="letter">✉️ Бланк письма</button>
+                <button class="tabs__btn" data-type="official">👔 Бланк должностного лица</button>
+            </div>
+
+            <!-- Форма для бланка организации -->
+            <div id="organizationForm" class="form ">
+                <div class="form__group">
+                    <label class="form__label" >Название вышестоящей организации</label>
+                    <input class="form__input" id="org-parent-name" type="text" placeholder="РОСАРХИВ">
+                </div>
+                <div class="form__group">
+                    <label class="form__label">Название организации</label>
+                    <input class="form__input" id="org-name" type="text" placeholder="ООО «Пример»">
+                </div>
+                <div class="form__group">
+                    <label class="form__label">Сокращенное название</label>
+                    <input class="form__input" id="short-name" type="text" placeholder="ВНИИДАД">
+                </div>
+                <div class="form__group">
+                    <label class="form__label">Город</label>
+                    <input class="form__input" id="city-name" type="text" placeholder="Москва">
+                </div>
+                <div class="form__row">
+                    <div class="form__group">
+                        <label class="form__label">Номер</label>
+                        <input class="form__input" id="number-count" type="text" placeholder="123">
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Основной текст</label>
+                        <textarea class="form__input" id="text-value" row="5" placeholder="Поручаю: ...."></textarea>
+                    </div>
+                </div>
+                <button class="form__submit form__sumbit--organization">Создать бланк организации</button>
+            </div>
+
+            <!-- Форма для бланка письма -->
+            <div id="letterForm" class="form ">
+                <div class="form__row">
+                    <div class="form__group">
+                        <label class="form__label">Кому (компания)</label>
+                        <input class="form__input" type="text" placeholder="ООО «Ромашка»">
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Кому лично</label>
+                        <input class="form__input" type="text" placeholder="Иванову И.И.">
+                    </div>
+                </div>
+                <div class="form__group">
+                    <label class="form__label">Адрес получателя</label>
+                    <input class="form__input" type="text" placeholder="г. Москва, ул. Ленина, д. 1">
+                </div>
+                <div class="form__row">
+                    <div class="form__group">
+                        <label class="form__label">ИНН</label>
+                        <input class="form__input" type="text" placeholder="7701123456">
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">КПП</label>
+                        <input class="form__input" type="text" placeholder="770101001">
+                    </div>
+                </div>
+                <div class="form__group">
+                    <label class="form__label">Тема письма</label>
+                    <input class="form__input" type="text" placeholder="О сотрудничестве">
+                </div>
+                <button class="form__submit">Создать бланк письма</button>
+            </div>
+
+            <!-- Форма для бланка должностного лица -->
+            <div id="officialForm" class="form" >
+                <div class="form__row">
+                    <div class="form__group">
+                        <label class="form__label">Фамилия</label>
+                        <input class="form__input" type="text" placeholder="Иванов">
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Имя</label>
+                        <input class="form__input" type="text" placeholder="Иван">
+                    </div>
+                </div>
+                <div class="form__group">
+                    <label class="form__label">Отчество</label>
+                    <input class="form__input" type="text" placeholder="Иванович">
+                </div>
+                <div class="form__row">
+                    <div class="form__group">
+                        <label class="form__label">Должность</label>
+                        <input class="form__input" type="text" placeholder="Генеральный директор">
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Отдел</label>
+                        <input class="form__input" type="text" placeholder="Управление">
+                    </div>
+                </div>
+                <div class="form__group">
+                    <label class="form__label">Оклад (₽)</label>
+                    <input class="form__input" type="text" placeholder="150 000">
+                </div>
+                <button class="form__submit">Создать бланк сотрудника</button>
+            </div>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+<script src="https://unpkg.com/html-docx-js/dist/html-docx.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <!-- Скоро добавим сюда JavaScript -->
+</body>
+</html>

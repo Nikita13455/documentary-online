@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Угловой бланк</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Бланк */
+        .blank {
+            width: 800px;
+            min-height: 1000px;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        /* ВСЕ В ЛЕВОМ ВЕРХНЕМ УГЛУ */
+        .blank__corner {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            width: 400px;
+        }
+
+        /* Название организации */
+        .blank__title {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        /* Тип учреждения */
+        .blank__type {
+            font-size: 14px;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        /* Полное название */
+        .blank__full-name {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        /* Аббревиатура в скобках */
+        .blank__abbr {
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Адрес */
+        .blank__address {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        /* Контакты */
+        .blank__contacts {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        /* Реквизиты */
+        .blank__requisites {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 30px;
+        }
+
+        /* Номера */
+        .blank__numbers {
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .blank__number-item {
+            margin-bottom: 5px;
+            text-align: center;
+            
+        }
+
+        .blank__underline {
+            letter-spacing: 4px;
+            margin-left: 5px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="blank">
+        <!-- ВСЁ В ЛЕВОМ ВЕРХНЕМ УГЛУ -->
+        
+            
+            <!-- Полное название -->
+            <div class="blank__full-name">
+                РОСАРХИВ <br>
+                Государственное учреждение
+                Всероссийский научно-исследовательский институт<br>
+                документоведения и архивного дела
+            </div>
+            
+            <!-- Аббревиатура -->
+            <div class="blank__abbr">(ВНИИДАД)</div>
+            
+            <!-- Пустая строка как на фото -->
+            <div style="height: 10px;"></div>
+            
+            <!-- Адрес -->
+            
+            
+
+            
+            
+            <!-- Номера -->
+            <div class="blank__numbers">
+                <div class="blank__number-item">
+                     <span class=>Москва</span>
+                </div>
+                <div class="blank__number-item">
+                    <span class="blank__underline">______</span>  <span class="blank__underline"> № ______</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ОСНОВНОЕ МЕСТО ДЛЯ ТЕКСТА (с отступом от левого угла) -->
+        <div style="margin-left: 100px; margin-top: 500px; padding: 20px;">
+            
+        </div>
+    </div>
+</body>
+</html>
