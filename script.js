@@ -210,19 +210,37 @@ let TextValue = document.querySelector("#text-value").value
 </body>
 </html>`;
 
-const converted = htmlDocx.asBlob(WordDoc, {
-        orientation: 'portrait', // книжная ориентация
-        margins: { 
-            top: 1000,      // отступы в твипах (1/20 точки)
-            right: 1000, 
-            bottom: 1000, 
-            left: 1000 
-        }
-    });
-    
-    // Скачиваем через FileSaver
-    saveAs(converted, 'blank.doc');
+function downloadDocx(blob, filename) {
+    // Проверяем, есть ли saveAs от FileSaver (он должен быть подключен)
+    if (window.saveAs) {
+        // Пытаемся использовать FileSaver (работает на десктопе и иногда на мобилках)
+        saveAs(blob, filename);
+    } else {
+        // Универсальный fallback метод через ссылку
+        const link = document.createElement('a');
+        const url = window.URL.createObjectURL(blob);
+        
+        link.href = url;
+        link.download = filename;
+        link.style.display = 'none';
+        
+        // Добавляем в документ, кликаем и удаляем
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Очищаем память
+        setTimeout(() => {
+            window.URL.revokeObjectURL(url);
+        }, 100);
+    }
+}
 
+
+let docBlob = htmlDocx.asBlob(wordDoc, { orientation: "portrait" });
+
+    // 4. Скачиваем (используем новую функцию)
+    downloadDocx(docBlob, "company-blanc.docx");
 
 
 
