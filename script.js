@@ -60,7 +60,7 @@ let NumberName = document.querySelector("#number-count").value
 let TextValue = document.querySelector("#text-value").value
 
 
-    let WordDoc = `<!DOCTYPE html>
+    let wordDoc = `<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -76,20 +76,18 @@ let TextValue = document.querySelector("#text-value").value
         body {
             font-family: 'Times New Roman', Times, serif;
             background: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            
+            width:595px;
             padding: 20px;
         }
 
         /* Бланк */
         .blank {
-            width: 800px;
+            width: 595px
             min-height: 1000px;
             background: white;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 20px;
+            
             position: relative;
         }
 
@@ -119,8 +117,8 @@ let TextValue = document.querySelector("#text-value").value
 
         /* Полное название */
         .blank__full-name {
-            font-size: 14px;
-            line-height: 1.4;
+            font-size: 16px;
+            line-height: 1.2;
             margin-bottom: 5px;
             text-align: center;
         }
@@ -188,8 +186,6 @@ let TextValue = document.querySelector("#text-value").value
             <!-- Аббревиатура -->
             <div class="blank__abbr">${ShortName}</div>
             
-            <!-- Пустая строка как на фото -->
-            <div style="height: 10px;"></div>
 
             <!-- Номера -->
             <div class="blank__numbers">
@@ -210,28 +206,89 @@ let TextValue = document.querySelector("#text-value").value
 </body>
 </html>`;
 
-function downloadForPC(blob, filename) {
-    saveAs(blob, filename);
+async function generatePDF(htmlContent, filename) {
+    // Создаём лоадер
+    const loader = document.createElement('div');
+    loader.className = 'loader-overlay';
+    loader.innerHTML = `
+        <div class="loader-card">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Создание PDF</div>
+            <div class="loader-subtext">Это займёт несколько секунд...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(loader);
+    
+    // Показываем лоадер
+    setTimeout(() => loader.classList.add('active'), 10);
+    
+    // Функция обновления прогресса
+    const updateProgress = (percent) => {
+        const fill = document.getElementById('progressFill');
+        if (fill) fill.style.width = percent + '%';
+    };
+    
+    // Создаём контейнер
+    const element = document.createElement('div');
+    element.innerHTML = htmlContent;
+    element.style.width = '595px';
+    element.style.padding = '20px';
+    element.style.backgroundColor = 'white';
+    element.style.position = 'absolute';
+    element.style.left = '-9999px';
+    element.style.top = '-9999px';
+    document.body.appendChild(element);
+    
+    try {
+        updateProgress(20);
+        await new Promise(resolve => setTimeout(resolve, 50));
+        
+        updateProgress(40);
+        const canvas = await html2canvas(element, {
+            scale: 1.5,
+            backgroundColor: '#ffffff',
+            logging: false,
+            allowTaint: false,
+            useCORS: true,
+            windowWidth: 595
+        });
+        
+        updateProgress(70);
+        const pdf = new jspdf.jsPDF({
+            orientation: 'portrait',
+            unit: 'px',
+            format: 'a4'
+        });
+        
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const imgWidth = pageWidth;
+        const imgHeight = (canvas.height * pageWidth) / canvas.width;
+        
+        updateProgress(90);
+        pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, imgWidth, imgHeight);
+        pdf.save(filename + '.pdf');
+        
+        updateProgress(100);
+        console.log('PDF готов');
+    } catch (error) {
+        console.error('Ошибка:', error);
+    } finally {
+        // Убираем лоадер
+        loader.classList.remove('active');
+        setTimeout(() => document.body.removeChild(loader), 300);
+        document.body.removeChild(element);
+    }
 }
 
-// Для мобилок - открываем в новой вкладке
-function downloadForMobile(blob, filename) {
-    const url = window.URL.createObjectURL(blob);
-    window.open(url, '_blank');
-    setTimeout(() => window.URL.revokeObjectURL(url), 1000);
-}
 
-// Определяем устройство
-const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+generatePDF(wordDoc, "test");
 
-let docBlob = htmlDocx.asBlob( WordDoc, { orientation: "portrait" });
 
-// Выбираем нужный способ
-if (isMobile) {
-    downloadForMobile(docBlob, "company-blanc.docx");
-} else {
-    downloadForPC(docBlob, "company-blanc.docx");
-}
+
+
 
 
     
