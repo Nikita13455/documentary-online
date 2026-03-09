@@ -210,37 +210,31 @@ let TextValue = document.querySelector("#text-value").value
 </body>
 </html>`;
 
-function downloadDocx(blob, filename) {
-    // Проверяем, есть ли saveAs от FileSaver (он должен быть подключен)
-    if (window.saveAs) {
-        // Пытаемся использовать FileSaver (работает на десктопе и иногда на мобилках)
-        saveAs(blob, filename);
-    } else {
-        // Универсальный fallback метод через ссылку
-        const link = document.createElement('a');
-        const url = window.URL.createObjectURL(blob);
-        
-        link.href = url;
-        link.download = filename;
-        link.style.display = 'none';
-        
-        // Добавляем в документ, кликаем и удаляем
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        // Очищаем память
-        setTimeout(() => {
-            window.URL.revokeObjectURL(url);
-        }, 100);
-    }
+function downloadForPC(blob, filename) {
+    saveAs(blob, filename);
+}
+
+// Для мобилок - открываем в новой вкладке
+function downloadForMobile(blob, filename) {
+    const url = window.URL.createObjectURL(blob);
+    window.open(url, '_blank');
+    setTimeout(() => window.URL.revokeObjectURL(url), 1000);
+}
+
+// Определяем устройство
+const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+let docBlob = htmlDocx.asBlob( WordDoc, { orientation: "portrait" });
+
+// Выбираем нужный способ
+if (isMobile) {
+    downloadForMobile(docBlob, "company-blanc.docx");
+} else {
+    downloadForPC(docBlob, "company-blanc.docx");
 }
 
 
-let docBlob = htmlDocx.asBlob(wordDoc, { orientation: "portrait" });
-
-    // 4. Скачиваем (используем новую функцию)
-    downloadDocx(docBlob, "company-blanc.docx");
+    
 
 
 
