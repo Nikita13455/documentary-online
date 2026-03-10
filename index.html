@@ -272,33 +272,53 @@
             <div id="letterForm" class="form ">
                 <div class="form__row">
                     <div class="form__group">
-                        <label class="form__label">Кому (компания)</label>
-                        <input class="form__input" type="text" placeholder="ООО «Ромашка»">
+                        <label class="form__label">Название вышестоящей организации</label>
+                        <input class="form__input" id="high-organization" type="text" placeholder="РОСАРХИВ">
                     </div>
                     <div class="form__group">
-                        <label class="form__label">Кому лично</label>
-                        <input class="form__input" type="text" placeholder="Иванову И.И.">
+                        <label class="form__label">Полное название организации</label>
+                        <input class="form__input" id="fullName" type="text" placeholder="Муниципальное образовательное учреждение...">
                     </div>
                 </div>
                 <div class="form__group">
-                    <label class="form__label">Адрес получателя</label>
-                    <input class="form__input" type="text" placeholder="г. Москва, ул. Ленина, д. 1">
+                    <label class="form__label">Сокращенное название организации</label>
+                    <input class="form__input" id="shortName" type="text" placeholder="МОУ ВШ">
                 </div>
                 <div class="form__row">
                     <div class="form__group">
-                        <label class="form__label">ИНН</label>
-                        <input class="form__input" type="text" placeholder="7701123456">
+                        <label class="form__label">Юридический адрес компании</label>
+                        <input class="form__input" id="addressName" type="text" placeholder="Профсоюзная ул., д. 82, Москва, 117393">
                     </div>
                     <div class="form__group">
-                        <label class="form__label">КПП</label>
-                        <input class="form__input" type="text" placeholder="770101001">
+                        <label class="form__label">Телефон компании</label>
+                        <input class="form__input" id="phoneName" type="text" placeholder="(495) 000 00 00">
                     </div>
                 </div>
                 <div class="form__group">
-                    <label class="form__label">Тема письма</label>
-                    <input class="form__input" type="text" placeholder="О сотрудничестве">
+                    <label class="form__label">Email компании</label>
+                    <input class="form__input" id="emailName" type="text" placeholder="vniidad@mail.ru">
                 </div>
-                <button class="form__submit">Создать бланк письма</button>
+                <div class="form__group">
+                    <label class="form__label">Сайт компании</label>
+                    <input class="form__input" id="siteName" type="text" placeholder="vniidad.ru">
+                </div>
+                <div class="form__group">
+                    <label class="form__label"> ОКПО</label>
+                    <input class="form__input" id="okpoName" type="text" placeholder="123456...">
+                </div>
+                <div class="form__group">
+                    <label class="form__label">ОГРН</label>
+                    <input class="form__input" id="ogrnName" type="text" placeholder="123456...">
+                </div>
+                <div class="form__group">
+                    <label class="form__label">ИНН/КПП</label>
+                    <input class="form__input" type="text" id="innName" placeholder="123456...">
+                </div>
+                <div class="form__group">
+                    <label class="form__label">Текст письма</label>
+                    <textarea class="form__input" type="text" id="textValue" placeholder="Здравствуйте, ..."></textarea>
+                </div>
+                <button class="form__submit form__submit--letter">Создать бланк письма</button>
             </div>
 
             <!-- Форма для бланка должностного лица -->
@@ -339,6 +359,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <!-- Потом твой код -->
 <script src="script.js"></script>

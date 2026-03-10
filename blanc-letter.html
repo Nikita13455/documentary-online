@@ -9,26 +9,23 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            text-align: center;
         }
 
         body {
             font-family: 'Times New Roman', Times, serif;
             background: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            
+            width:595px;
             padding: 20px;
         }
 
         /* Бланк */
         .blank {
-            width: 800px;
+            width: 595px;
             min-height: 1000px;
             background: white;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 20px;
+            
             position: relative;
         }
 
@@ -58,15 +55,17 @@
 
         /* Полное название */
         .blank__full-name {
-            font-size: 14px;
-            line-height: 1.4;
+            font-size: 16px;
+            line-height: 1.2;
             margin-bottom: 5px;
+            text-align: center;
         }
 
         /* Аббревиатура в скобках */
         .blank__abbr {
             font-size: 14px;
             margin-bottom: 15px;
+            text-align: center;
         }
 
         /* Адрес */
@@ -79,14 +78,14 @@
         /* Контакты */
         .blank__contacts {
             font-size: 14px;
-            line-height: 1;
+            line-height: 1.4;
             margin-bottom: 10px;
         }
 
         /* Реквизиты */
         .blank__requisites {
             font-size: 14px;
-            line-height: 1;
+            line-height: 1.4;
             margin-bottom: 30px;
         }
 
@@ -98,11 +97,14 @@
 
         .blank__number-item {
             margin-bottom: 5px;
+            text-align: center;
+            
         }
 
         .blank__underline {
             letter-spacing: 4px;
             margin-left: 5px;
+            text-decoration: underline;
         }
 
         
@@ -115,55 +117,29 @@
             
             <!-- Полное название -->
             <div class="blank__full-name">
-                РОСАРХИВ <br>
-                Государственное учреждение
-                Всероссийский научно-исследовательский институт<br>
-                документоведения и архивного дела
+                ${OrgParentName} <br>
+                ${OrgName}
             </div>
             
             <!-- Аббревиатура -->
-            <div class="blank__abbr">(ВНИИДАД)</div>
+            <div class="blank__abbr">${ShortName}</div>
             
-            <!-- Пустая строка как на фото -->
-            <div style="height: 10px;"></div>
-            
-            <!-- Адрес -->
-            <div class="blank__address">
-                Профсоюзная ул., д. 82, Москва, 117393
-            </div>
-            
-            <!-- Контакты -->
-            <div class="blank__contacts">
-                Тел./факс (095) 718-78-74<br>
-                E-mail: mail@vnidad.ru<br>
-                http://www.vnidad.ru
-            </div>
-            
-            <!-- Реквизиты -->
-            <div class="blank__requisites">
-                ОКПО 02842708, ОГРН 1027700380795,<br>
-                ИНН/КПП 7708033140/771001001
-            </div>
-            
-            <!-- Линия-разделитель (как на фото) -->
-            
-            
+
             <!-- Номера -->
             <div class="blank__numbers">
                 <div class="blank__number-item">
-                    № <span class="blank__underline">______</span>
+                     <span class=>${CityName}</span>
                 </div>
                 <div class="blank__number-item">
-                    На № <span class="blank__underline">______</span> от <span class="blank__underline">______</span>
+                    <span>______</span> № <span class="blank__underline">  ___${NumberName}____</span>
                 </div>
-            </div>
-            <div style="margin-left: 80px; margin-top: 100px; padding: 20px;">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur doloribus error distinctio eum sed tempore consequatur est, quidem animi dolorem similique quos enim sunt doloremque optio quo ea nemo amet possimus sit officiis impedit? Asperiores, delectus! Facere, adipisci officia. Et ipsum nesciunt, cumque similique laboriosam eum dolores maiores, nobis reiciendis consequuntur porro distinctio doloremque dolore incidunt earum ducimus. Possimus tempore pariatur numquam laboriosam dolorem modi labore reprehenderit non suscipit necessitatibus, ipsa culpa error repudiandae officia reiciendis dignissimos vel. Beatae, dicta? Aut voluptate omnis blanditiis vel architecto nemo culpa asperiores temporibus sint nulla, repellat sunt et iusto deleniti placeat. Molestiae, incidunt?
             </div>
         </div>
         
         <!-- ОСНОВНОЕ МЕСТО ДЛЯ ТЕКСТА (с отступом от левого угла) -->
-        
+        <div style="margin-left: 100px; margin-top: 100px; padding: 20px;">
+            ${TextValue}
+        </div>
     
 </body>
 </html>
