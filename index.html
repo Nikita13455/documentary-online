@@ -322,36 +322,60 @@
             </div>
 
             <!-- Форма для бланка должностного лица -->
-            <div id="officialForm" class="form" >
+            <div id="officialForm" class="form ">
                 <div class="form__row">
                     <div class="form__group">
-                        <label class="form__label">Фамилия</label>
-                        <input class="form__input" type="text" placeholder="Иванов">
+                        <label class="form__label">Название вышестоящей организации</label>
+                        <input class="form__input" id="high-organization2" type="text" placeholder="РОСАРХИВ">
                     </div>
                     <div class="form__group">
-                        <label class="form__label">Имя</label>
-                        <input class="form__input" type="text" placeholder="Иван">
+                        <label class="form__label">Полное название организации</label>
+                        <input class="form__input" id="fullName2" type="text" placeholder="Муниципальное образовательное учреждение...">
                     </div>
                 </div>
                 <div class="form__group">
-                    <label class="form__label">Отчество</label>
-                    <input class="form__input" type="text" placeholder="Иванович">
+                    <label class="form__label">Сокращенное название организации</label>
+                    <input class="form__input" id="shortName2" type="text" placeholder="МОУ ВШ">
+                </div>
+                <div class="form__group">
+                    <label class="form__label">Название должности</label>
+                    <input class="form__input" id="faceName" type="text" placeholder="МОУ ВШ">
                 </div>
                 <div class="form__row">
                     <div class="form__group">
-                        <label class="form__label">Должность</label>
-                        <input class="form__input" type="text" placeholder="Генеральный директор">
+                        <label class="form__label">Юридический адрес компании</label>
+                        <input class="form__input" id="addressName2" type="text" placeholder="Профсоюзная ул., д. 82, Москва, 117393">
                     </div>
                     <div class="form__group">
-                        <label class="form__label">Отдел</label>
-                        <input class="form__input" type="text" placeholder="Управление">
+                        <label class="form__label">Телефон компании</label>
+                        <input class="form__input" id="phoneName2" type="tel" placeholder="(495) 000 00 00">
                     </div>
                 </div>
                 <div class="form__group">
-                    <label class="form__label">Оклад (₽)</label>
-                    <input class="form__input" type="text" placeholder="150 000">
+                    <label class="form__label">Email компании</label>
+                    <input class="form__input" id="emailName2" type="text" placeholder="vniidad@mail.ru">
                 </div>
-                <button class="form__submit">Создать бланк сотрудника</button>
+                <div class="form__group">
+                    <label class="form__label">Сайт компании</label>
+                    <input class="form__input" id="siteName2" type="text" placeholder="vniidad.ru">
+                </div>
+                <div class="form__group">
+                    <label class="form__label"> ОКПО</label>
+                    <input class="form__input" id="okpoName2" type="number" placeholder="123456...">
+                </div>
+                <div class="form__group">
+                    <label class="form__label">ОГРН</label>
+                    <input class="form__input" id="ogrnName2" type="number" placeholder="123456...">
+                </div>
+                <div class="form__group">
+                    <label class="form__label">ИНН/КПП</label>
+                    <input class="form__input" type="number" id="innName2" placeholder="123456...">
+                </div>
+                <div class="form__group">
+                    <label class="form__label">Текст письма</label>
+                    <textarea class="form__input" type="text" id="textValue2" placeholder="Здравствуйте, ..."></textarea>
+                </div>
+                <button class="form__submit form__submit--face">Создать бланк письма</button>
             </div>
         </div>
     </div>
